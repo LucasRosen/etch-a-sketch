@@ -18,7 +18,20 @@ function createSquare() {
   const square = document.createElement("div");
   square.classList.add("square");
 
+  square.addEventListener("mouseover", onMouseOver);
+  square.addEventListener("mouseout", onMouseOut);
+
   return square;
+}
+
+function onMouseOver(event) {
+  const targetSquare = event.target;
+  targetSquare.style.cssText = "opacity: 50%";
+}
+
+function onMouseOut(event) {
+  const targetSquare = event.target;
+  targetSquare.style.cssText = "opacity: 100%";
 }
 
 generateGrid(16);
