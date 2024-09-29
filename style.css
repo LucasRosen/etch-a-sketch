@@ -1,0 +1,15 @@
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    aspect-ratio: 1 / 1;
+    height: 80vh;
+    border: 2px black solid;
+}
