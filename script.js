@@ -2,6 +2,7 @@ const gridContainer = document.querySelector("#container");
 const paletteContainer = document.querySelector("#color-palette");
 const newGridButton = document.querySelector("#new-grid-button");
 const clearGridButton = document.querySelector("#clear-grid-button");
+const toggleGridCheckbox = document.querySelector("#grid-toggle");
 
 let isDrawing = false;
 let curColor = "#000000";
@@ -77,10 +78,29 @@ function onMouseOut(event) {
 }
 
 function onChangeColor(event) {
-  curColor = event.target.style.backgroundColor
+  curColor = event.target.style.backgroundColor;
   gridContainer.style.borderColor = curColor;
-};
+}
 
+function enableGrid() {
+  const columns = gridContainer.children;
+  for (let i = 0; i < columns.length; i++) {
+    const squares = columns[i].children;
+    for (let j = 0; j < squares.length; j++) {
+      squares[j].style.borderWidth = "1px";
+    }
+  }
+}
+
+function disableGrid() {
+  const columns = gridContainer.children;
+  for (let i = 0; i < columns.length; i++) {
+    const squares = columns[i].children;
+    for (let j = 0; j < squares.length; j++) {
+      squares[j].style.borderWidth = "0";
+    }
+  }
+}
 function isNumber(value) {
   return typeof value === "number";
 }
@@ -117,6 +137,15 @@ newGridButton.addEventListener("click", () => {
   }
 });
 
+// Toggle grid
+toggleGridCheckbox.addEventListener("change", () => {
+  if (toggleGridCheckbox.checked) {
+    enableGrid();
+  } else {
+    disableGrid();
+  }
+});
+
 generateGrid(16);
 
 // Generate color palette
@@ -127,6 +156,3 @@ for (color of colorPalette) {
 
   newSquare.addEventListener("click", onChangeColor);
 }
-
-// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// Toggle border/grid button
