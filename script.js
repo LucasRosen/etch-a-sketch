@@ -1,8 +1,12 @@
 const gridContainer = document.querySelector("#container");
 const newGridButton = document.querySelector("#new-grid-button");
+const clearGridButton = document.querySelector("#clear-grid-button");
 
 let isDrawing = false;
 let curColor = "#000000";
+
+let defaultGridSize = 16;
+let lastGridSize = defaultGridSize;
 
 // Generates a gridSize x gridSize grid of divs
 function generateGrid(gridSize) {
@@ -64,17 +68,32 @@ document.body.addEventListener("mouseup", () => {
   isDrawing = false;
 });
 
+// Clear Grid
+clearGridButton.addEventListener("click", () => {
+  clearGrid();
+  generateGrid(lastGridSize);
+});
+
 // Generate new grid when button is clicked
 newGridButton.addEventListener("click", () => {
   const newGridSize = Number(
-    prompt("Enter new grid size:\nMust be a number between 10-100", 16)
+    prompt(
+      "Enter new grid size:\nMust be a number between 10-100",
+      defaultGridSize
+    )
   );
   if (isNumber(newGridSize) && newGridSize >= 10 && newGridSize <= 100) {
     clearGrid();
     generateGrid(newGridSize);
+    lastGridSize = newGridSize;
   } else {
     alert("Invalid grid size");
   }
 });
 
 generateGrid(16);
+
+// TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Color picker/color swatches
+// Clear grid button
+// Toggle border/grid button
