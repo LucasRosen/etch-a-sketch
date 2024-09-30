@@ -17,9 +17,22 @@ body {
   margin-top: 8px;
   aspect-ratio: 1 / 1;
   height: 80vh;
-  border: 2px black solid;
+  border: 2px #000000 solid;
 
   display: flex;
+}
+
+#color-palette {
+  margin-top: 8px;
+  width: 80vh;
+  height: 4vh;
+  border: 1px #000000, solid;
+
+  display: flex;
+}
+
+#color-palette > div {
+  border: 1px #000000, solid;
 }
 
 .column {

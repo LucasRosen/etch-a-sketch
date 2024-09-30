@@ -1,4 +1,5 @@
 const gridContainer = document.querySelector("#container");
+const paletteContainer = document.querySelector("#color-palette");
 const newGridButton = document.querySelector("#new-grid-button");
 const clearGridButton = document.querySelector("#clear-grid-button");
 
@@ -7,6 +8,26 @@ let curColor = "#000000";
 
 let defaultGridSize = 16;
 let lastGridSize = defaultGridSize;
+
+const colorPalette = [
+  "#FFFFFF",
+  "#000000",
+  "#404040",
+  "#FF0000",
+  "#FF6A00",
+  "#FFD800",
+  "#B6FF00",
+  "#4CFF00",
+  "#00FF21",
+  "#00FF90",
+  "#00FFFF",
+  "#0094FF",
+  "#0026FF",
+  "#4800FF",
+  "#B200FF",
+  "#FF00DC",
+  "#FF006E",
+];
 
 // Generates a gridSize x gridSize grid of divs
 function generateGrid(gridSize) {
@@ -43,7 +64,7 @@ function clearGrid() {
 function onMouseOver(event) {
   const targetSquare = event.target;
 
-  if (isDrawing) {
+  if (isDrawing && targetSquare.parentElement.classList == "column") {
     targetSquare.style.backgroundColor = curColor;
   } else {
     targetSquare.style.opacity = "0.5";
@@ -54,6 +75,10 @@ function onMouseOut(event) {
   const targetSquare = event.target;
   targetSquare.style.opacity = "1";
 }
+
+function onChangeColor(event) {
+  curColor = event.target.style.backgroundColor
+};
 
 function isNumber(value) {
   return typeof value === "number";
@@ -93,7 +118,14 @@ newGridButton.addEventListener("click", () => {
 
 generateGrid(16);
 
+// Generate color palette
+for (color of colorPalette) {
+  const newSquare = createSquare();
+  newSquare.style.backgroundColor = color;
+  paletteContainer.appendChild(newSquare);
+
+  newSquare.addEventListener("click", onChangeColor);
+}
+
 // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// Color picker/color swatches
-// Clear grid button
 // Toggle border/grid button
