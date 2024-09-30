@@ -78,6 +78,7 @@ function onMouseOut(event) {
 
 function onChangeColor(event) {
   curColor = event.target.style.backgroundColor
+  gridContainer.style.borderColor = curColor;
 };
 
 function isNumber(value) {
