@@ -1,6 +1,9 @@
 const gridContainer = document.querySelector("#container");
 const newGridButton = document.querySelector("#new-grid-button");
 
+let isDrawing = false;
+let curColor = "#000000";
+
 // Generates a gridSize x gridSize grid of divs
 function generateGrid(gridSize) {
   for (let x = 0; x < gridSize; x++) {
@@ -15,14 +18,6 @@ function generateGrid(gridSize) {
   }
 }
 
-function clearGrid() {
-  let child = gridContainer.lastElementChild;
-  while (child) {
-    gridContainer.removeChild(child);
-    child = gridContainer.lastElementChild;
-  }
-}
-
 function createSquare() {
   const square = document.createElement("div");
   square.classList.add("square");
@@ -33,19 +28,41 @@ function createSquare() {
   return square;
 }
 
+function clearGrid() {
+  let child = gridContainer.lastElementChild;
+  while (child) {
+    gridContainer.removeChild(child);
+    child = gridContainer.lastElementChild;
+  }
+}
+
 function onMouseOver(event) {
   const targetSquare = event.target;
-  targetSquare.style.cssText = "opacity: 50%";
+
+  if (isDrawing) {
+    targetSquare.style.backgroundColor = curColor;
+  } else {
+    targetSquare.style.opacity = "0.5";
+  }
 }
 
 function onMouseOut(event) {
   const targetSquare = event.target;
-  targetSquare.style.cssText = "opacity: 100%";
+  targetSquare.style.opacity = "1";
 }
 
 function isNumber(value) {
   return typeof value === "number";
 }
+
+// Check if mouse is down on the entire page when drawing
+document.body.addEventListener("mousedown", () => {
+  isDrawing = true;
+});
+
+document.body.addEventListener("mouseup", () => {
+  isDrawing = false;
+});
 
 // Generate new grid when button is clicked
 newGridButton.addEventListener("click", () => {
