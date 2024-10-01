@@ -4,6 +4,7 @@ const newGridButton = document.querySelector("#new-grid-button");
 const clearGridButton = document.querySelector("#clear-grid-button");
 const toggleGridCheckbox = document.querySelector("#grid-toggle");
 
+let isGridOn = true;
 let isDrawing = false;
 let curColor = "#000000";
 
@@ -46,6 +47,7 @@ function generateGrid(gridSize) {
 
 function createSquare() {
   const square = document.createElement("div");
+  if (isGridOn) {square.classList.add("js-border")};
   square.classList.add("square");
 
   square.addEventListener("mouseover", onMouseOver);
@@ -87,7 +89,8 @@ function enableGrid() {
   for (let i = 0; i < columns.length; i++) {
     const squares = columns[i].children;
     for (let j = 0; j < squares.length; j++) {
-      squares[j].style.borderWidth = "1px";
+      isGridOn = true;
+      squares[j].classList.add("js-border");
     }
   }
 }
@@ -97,7 +100,8 @@ function disableGrid() {
   for (let i = 0; i < columns.length; i++) {
     const squares = columns[i].children;
     for (let j = 0; j < squares.length; j++) {
-      squares[j].style.borderWidth = "0";
+      isGridOn = false;
+      squares[j].classList.remove("js-border");
     }
   }
 }

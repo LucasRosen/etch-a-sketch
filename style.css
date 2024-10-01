@@ -46,7 +46,10 @@ body {
 
 .square {
   background-color: #ffffff;
-  border: 1px #adadad solid;
 
   flex: auto;
+}
+
+.js-border {
+  border: 1px #adadad solid;
 }
