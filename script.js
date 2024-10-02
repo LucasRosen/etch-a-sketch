@@ -40,6 +40,9 @@ function generateGrid(gridSize) {
 
     for (let y = 0; y < gridSize; y++) {
       const newSquare = createSquare();
+      newSquare.addEventListener("mousedown", () => {
+        newSquare.style.backgroundColor = curColor;
+      })
 
       if (isGridOn) {
         newSquare.classList.add("js-border");
