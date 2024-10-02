@@ -40,6 +40,11 @@ function generateGrid(gridSize) {
 
     for (let y = 0; y < gridSize; y++) {
       const newSquare = createSquare();
+
+      if (isGridOn) {
+        newSquare.classList.add("js-border");
+      }
+
       newColumn.appendChild(newSquare);
     }
   }
@@ -47,7 +52,6 @@ function generateGrid(gridSize) {
 
 function createSquare() {
   const square = document.createElement("div");
-  if (isGridOn) {square.classList.add("js-border")};
   square.classList.add("square");
 
   square.addEventListener("mouseover", onMouseOver);
